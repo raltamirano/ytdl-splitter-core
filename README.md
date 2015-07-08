@@ -9,10 +9,11 @@ Extract audio files using the tracklist provided in the description for the vide
     var splitter = new Splitter();
 
     splitter.on('end', function(info) {
-        console.log(info.url, 'was downloaded then split to files at:', info.outputPath);
+        console.log(info.url, 'split files at:', info.outputPath);
     });
 
     splitter.split('https://www.youtube.com/watch?v=SOME_VIDEO_ID');
+
 
 Extract audio files using a CUE file as the tracklist:
 
@@ -20,7 +21,7 @@ Extract audio files using a CUE file as the tracklist:
     var splitter = new Splitter();
 
     splitter.on('end', function(info) {
-        console.log(info.url, 'was downloaded then split to files at:', info.outputPath);
+        console.log(info.url, 'split files at:', info.outputPath);
     });
 
     splitter.addCUETracklistExtractor('/tmp/some_file.cue');
