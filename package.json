@@ -1,0 +1,35 @@
+{
+  "name": "ytdl-splitter-core",
+  "version": "1.0.0",
+  "description": "Module to download YouTube videos (using youtube-dl) as separate audio files, using the tracklist provided on the description of the video or CUE files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raltamirano/ytdl-splitter-core.git"
+  },
+  "keywords": [
+    "cue",
+    "split",
+    "audio",
+    "mp3",
+    "download",
+    "youtube-dl",
+    "youtube",
+    "video"
+  ],
+  "author": "Rodrigo Altamirano <rodrigo.altamirano@gmail.com> (https://github.com/raltamirano)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raltamirano/ytdl-splitter-core/issues"
+  },
+  "homepage": "https://github.com/raltamirano/ytdl-splitter-core#readme",
+  "dependencies": {
+    "avconv": "^3.0.1",
+    "chaining-tool": "0.0.4",
+    "cue-parser": "0.0.3",
+    "youtube-dl": "^1.10.5"
+  }
+}
