@@ -139,11 +139,11 @@ YTDLSplitterCore.prototype.split = function(url, options) {
 			"durationInSecs": self.momentToSeconds(info.duration)
 		};
 
-		if (options.albumName)
+		if (options.albumName != undefined && options.albumName)
 			videoContext.albumName = options.albumName;
-		if (options.artistName)
+		if (options.artistName != undefined && options.artistName)
 			videoContext.artistName = options.artistName;
-		if (options.albumYear)
+		if (options.albumYear != undefined && options.albumYear)
 			videoContext.albumYear = options.albumYear;
 
 		self.extractTracklist(videoContext, function(tracklist) {
@@ -262,7 +262,7 @@ YTDLSplitterCore.prototype.splitMP3FileByTracklist = function(file, tracklist, c
 		params.push('-metadata');
 		params.push('album=' + tracklist.albumName);
 		params.push('-metadata');
-		params.push('author=' + tracklist.artistName);
+		params.push('artist=' + tracklist.artistName);
 		if (tracklist.albumYear != 0) {
 			params.push('-metadata');
 			params.push('date=' + tracklist.albumYear);
