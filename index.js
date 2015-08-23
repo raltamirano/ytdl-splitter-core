@@ -139,12 +139,14 @@ YTDLSplitterCore.prototype.split = function(url, options) {
 			"durationInSecs": self.momentToSeconds(info.duration)
 		};
 
-		if (options.albumName != undefined && options.albumName)
+		if (options.albumName)
 			videoContext.albumName = options.albumName;
-		if (options.artistName != undefined && options.artistName)
+		if (options.artistName)
 			videoContext.artistName = options.artistName;
-		if (options.albumYear != undefined && options.albumYear)
+		if (options.albumYear)
 			videoContext.albumYear = options.albumYear;
+	    if (options.tracklistData)
+			videoContext.description = options.tracklistData;
 
 		self.extractTracklist(videoContext, function(tracklist) {
 			if (!tracklist || !tracklist.tracks || tracklist.tracks.length <= 0)
