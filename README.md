@@ -1,5 +1,5 @@
 # ytdl-splitter-core
-Node.js module to download YouTube videos (using youtube-dl) as separate audio files, using the tracklist provided on the description of the video or CUE files.
+Node.js module to download YouTube videos as separate audio files, using the tracklist provided on the description of the video or CUE files.
 
 ## Usage
 
@@ -30,4 +30,5 @@ Extract audio files using a CUE file as the tracklist:
 
 ## Notes
 
-As this package depends on 'youtube-dl' and 'avconv', check for their requirements also. Currently, they are: the 'youtube-dl' and 'avconv' executables in your PATH, ready to be executed. Python (2.6, 2.7, or 3.2+) maybe needed in order to properly run 'youtube-dl'.
+As this package depends on 'avconv', check for its requirements also. Currently, they are: the 'avconv' executable in your PATH, ready to be executed.
+

@@ -1,7 +1,7 @@
 {
   "name": "ytdl-splitter-core",
-  "version": "1.0.3",
-  "description": "Module to download YouTube videos (using youtube-dl) as separate audio files, using the tracklist provided on the description of the video or CUE files.",
+  "version": "1.0.4",
+  "description": "Module to download YouTube videos as separate audio files, using the tracklist provided on the description of the video or CUE files.",
   "main": "index.js",
   "scripts": {
     "test": "exit 0"
@@ -16,7 +16,6 @@
     "audio",
     "mp3",
     "download",
-    "youtube-dl",
     "youtube",
     "video"
   ],
@@ -30,6 +29,7 @@
     "avconv": "^3.0.1",
     "chaining-tool": "0.0.4",
     "cue-parser": "0.0.3",
-    "youtube-dl": "^1.10.5"
+    "sanitize-filename": "^1.4.2",
+    "ytdl-core": "^0.6.0"
   }
 }

@@ -5,7 +5,8 @@ var avconv = require('avconv');
 var path = require('path');
 var chainOfResponsibility = require('chaining-tool');
 var cueParser  = require('cue-parser');
-var youtubedl = require('youtube-dl');
+var ytdlCore = require('ytdl-core');
+var sanitize = require("sanitize-filename");
 var os = require('os');
 
 
@@ -125,7 +126,7 @@ YTDLSplitterCore.prototype.split = function(url, options) {
 
 	this.emit('start', { "url": url });
 	var self = this;
-	youtubedl.getInfo(url, [], function(err, info) {
+	ytdlCore.getInfo(url, { "downloadURL": true }, function(err, info) {
 		if (err) {
 			self.emit('error', { "url": url, "error": err });
 			return;
@@ -135,8 +136,8 @@ YTDLSplitterCore.prototype.split = function(url, options) {
 		// then extract each song as a separate audio file.
 		var videoContext = {
 			"description": info.description,
-			"duration": info.duration,
-			"durationInSecs": self.momentToSeconds(info.duration)
+			"duration": self.secondsToMoment(info["length_seconds"]),
+			"durationInSecs": info["length_seconds"]
 		};
 
 		if (options.albumName)
@@ -159,10 +160,11 @@ YTDLSplitterCore.prototype.split = function(url, options) {
 			if (videoContext.albumYear != undefined)
 				tracklist.albumYear = videoContext.albumYear;
 
-			var video = new youtubedl(url);
-			var inputFileRoot = path.join(os.tmpdir(), info._filename);
+			var video = ytdlCore(url);
+			var videoFilename = sanitize(info.title) + '.flv';
+			var inputFileRoot = path.join(os.tmpdir(), videoFilename);
 			fs.mkdirSync(inputFileRoot);
-			var inputFile = path.join(inputFileRoot, info._filename);
+			var inputFile = path.join(inputFileRoot, videoFilename);
 
 			video.pipe(fs.createWriteStream(inputFile));
 
@@ -214,6 +216,17 @@ YTDLSplitterCore.prototype.momentToSeconds = function(input) {
 	var parts = input.split(':');
 	return ((parseInt(parts[0]) * 60) + parseInt(parts[1]));
 };
+
+YTDLSplitterCore.prototype.secondsToMoment = function(input) {
+	var minutes = input/60;
+	var minutesFormatted = ("00" + (minutes)).slice(-2);
+	if (minutes > 99)
+		minutesFormatted = ("000" + (minutes)).slice(-3);
+
+	return minutesFormatted + ':' + ("00" + (input-(input/60))).slice(-2);
+};
+
+
 
 YTDLSplitterCore.prototype.convertToMP3 = function(file, callback) {
 	var self = this;
